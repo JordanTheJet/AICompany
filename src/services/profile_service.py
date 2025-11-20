@@ -88,7 +88,7 @@ class ProfileService:
         auto_engage: bool = False,
         engagement_delay_min: int = 5,
         engagement_delay_max: int = 60,
-        metadata: Optional[Dict[str, Any]] = None
+        extra_data: Optional[Dict[str, Any]] = None
     ) -> Profile:
         """Create a new profile (persona)
 
@@ -101,7 +101,7 @@ class ProfileService:
             auto_engage: Enable automatic engagement
             engagement_delay_min: Minimum engagement delay in minutes
             engagement_delay_max: Maximum engagement delay in minutes
-            metadata: Additional metadata
+            extra_data: Additional metadata
 
         Returns:
             Created profile
@@ -115,7 +115,7 @@ class ProfileService:
             auto_engage=auto_engage,
             engagement_delay_min=engagement_delay_min,
             engagement_delay_max=engagement_delay_max,
-            metadata=metadata or {}
+            extra_data=extra_data or {}
         )
         self.db.add(profile)
         self.db.commit()
@@ -203,7 +203,7 @@ class ProfileService:
         platform_username: Optional[str] = None,
         platform_user_id: Optional[str] = None,
         platform_display_name: Optional[str] = None,
-        metadata: Optional[Dict[str, Any]] = None
+        extra_data: Optional[Dict[str, Any]] = None
     ) -> SocialAccount:
         """Add a social account to a profile
 
@@ -214,7 +214,7 @@ class ProfileService:
             platform_username: Username on platform
             platform_user_id: User ID on platform
             platform_display_name: Display name on platform
-            metadata: Additional metadata
+            extra_data: Additional metadata
 
         Returns:
             Created social account
@@ -230,7 +230,7 @@ class ProfileService:
             platform_username=platform_username,
             platform_user_id=platform_user_id,
             platform_display_name=platform_display_name,
-            metadata=metadata or {}
+            extra_data=extra_data or {}
         )
         self.db.add(account)
         self.db.commit()

@@ -41,7 +41,7 @@ class ProfileCreate(BaseModel):
     auto_engage: bool = False
     engagement_delay_min: int = 5
     engagement_delay_max: int = 60
-    metadata: Optional[Dict[str, Any]] = None
+    extra_data: Optional[Dict[str, Any]] = None
 
 
 class ProfileResponse(BaseModel):
@@ -147,7 +147,7 @@ async def create_profile(
         auto_engage=profile.auto_engage,
         engagement_delay_min=profile.engagement_delay_min,
         engagement_delay_max=profile.engagement_delay_max,
-        metadata=profile.metadata
+        extra_data=profile.extra_data
     )
     return created_profile
 

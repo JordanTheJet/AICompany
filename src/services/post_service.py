@@ -29,7 +29,7 @@ class PostService:
         media_urls: Optional[List[str]] = None,
         scheduled_at: Optional[datetime] = None,
         auto_engagement_enabled: bool = True,
-        metadata: Optional[Dict[str, Any]] = None
+        extra_data: Optional[Dict[str, Any]] = None
     ) -> Post:
         """Create a new post
 
@@ -41,7 +41,7 @@ class PostService:
             media_urls: List of media URLs
             scheduled_at: Schedule time
             auto_engagement_enabled: Enable auto-engagement
-            metadata: Additional metadata
+            extra_data: Additional metadata
 
         Returns:
             Created post
@@ -57,7 +57,7 @@ class PostService:
             status=status,
             scheduled_at=scheduled_at,
             auto_engagement_enabled=auto_engagement_enabled,
-            metadata=metadata or {}
+            extra_data=extra_data or {}
         )
         self.db.add(post)
         self.db.commit()

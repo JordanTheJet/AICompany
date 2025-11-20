@@ -67,8 +67,8 @@ class Profile(Base):
     engagement_delay_min = Column(Integer, default=5)  # Min minutes before engaging
     engagement_delay_max = Column(Integer, default=60)  # Max minutes before engaging
 
-    # Metadata
-    metadata = Column(JSON)  # Store additional profile info (personality traits, topics, etc.)
+    # Extra data
+    extra_data = Column(JSON)  # Store additional profile info (personality traits, topics, etc.)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -102,8 +102,8 @@ class SocialAccount(Base):
     is_verified = Column(Boolean, default=False)
     last_auth_at = Column(DateTime)
 
-    # Metadata
-    metadata = Column(JSON)  # Store platform-specific metadata
+    # Extra data
+    extra_data = Column(JSON)  # Store platform-specific metadata
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -146,8 +146,8 @@ class Post(Base):
     auto_engagement_enabled = Column(Boolean, default=True)
     engagement_completed = Column(Boolean, default=False)
 
-    # Metadata
-    metadata = Column(JSON)
+    # Extra data
+    extra_data = Column(JSON)
     error_message = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -220,8 +220,8 @@ class EngagementAction(Base):
     platform_action_id = Column(String(255))  # ID of like/comment on platform
     error_message = Column(Text)
 
-    # Metadata
-    metadata = Column(JSON)
+    # Extra data
+    extra_data = Column(JSON)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
