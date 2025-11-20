@@ -1,8 +1,21 @@
-# AICompany - Social Media Integration Platform
+# AICompany - Multi-Profile Social Media Automation Platform
 
-A comprehensive Python-based platform for automated social media posting to Twitter, Instagram, and TikTok.
+A comprehensive Python-based platform for managing multiple social media personas with automated engagement across Twitter, Instagram, and TikTok.
 
-## Features
+## 🚀 New in v2.0: Multi-Profile System with Automated Engagement!
+
+Build your own social media network where multiple profiles automatically engage with each other to create authentic-looking social proof and engagement!
+
+### Core Features
+
+- **👥 Multi-Profile Management**: Create unlimited personas, each with separate social media accounts
+- **🤖 Automated Engagement**: Profiles automatically like, comment on, and share each other's content
+- **📊 Intelligent Scheduling**: Randomized delays and probabilities for natural-looking engagement
+- **🎯 Customizable Rules**: Define engagement probability, timing, and behavior for each profile
+- **📈 Analytics**: Track engagement metrics and performance across all profiles
+- **🔄 Multi-Platform Posting**: Post to all platforms simultaneously from a single API call
+
+### Platform Features
 
 - **Multi-Platform Support**: Post to Twitter, Instagram, and TikTok from a single API
 - **Async Operations**: Built with FastAPI for high-performance async operations

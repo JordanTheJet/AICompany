@@ -18,9 +18,12 @@ tweepy==4.14.0
 instagrapi==2.0.0
 TikTokApi==6.3.0
 
-# Database (optional, for storing posts/schedules)
+# Database
 sqlalchemy==2.0.25
 alembic==1.13.1
+
+# Background Tasks & Scheduling
+apscheduler==3.10.4
 
 # Utilities
 python-dateutil==2.8.2

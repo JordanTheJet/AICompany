@@ -4,8 +4,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from src.config import settings
-from src.api.routes import twitter, instagram, tiktok
+from src.api.routes import twitter, instagram, tiktok, profiles, posts, engagement
 from src.models.schemas import HealthResponse
+from src.database import init_db
+from src.scheduler import start_scheduler, stop_scheduler
 from datetime import datetime
 import logging
 
@@ -19,8 +21,17 @@ logger = logging.getLogger(__name__)
 # Create FastAPI app
 app = FastAPI(
     title=settings.app_name,
-    description="Automated social media posting integration for Twitter, Instagram, and TikTok",
-    version="1.0.0",
+    description="""
+    Multi-Profile Social Media Automation Platform
+
+    Features:
+    - Multi-profile management: Create multiple personas with separate social accounts
+    - Multi-platform posting: Post to Twitter, Instagram, and TikTok simultaneously
+    - Automated engagement: Profiles automatically like, comment, and interact with each other
+    - Smart scheduling: Schedule posts and engagement actions
+    - Engagement analytics: Track performance across all profiles
+    """,
+    version="2.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
 )
@@ -114,9 +125,15 @@ async def api_info():
 
 
 # Include routers
+# Platform-specific routes
 app.include_router(twitter.router, prefix="/api/v1")
 app.include_router(instagram.router, prefix="/api/v1")
 app.include_router(tiktok.router, prefix="/api/v1")
+
+# Profile and engagement routes
+app.include_router(profiles.router, prefix="/api/v1")
+app.include_router(posts.router, prefix="/api/v1")
+app.include_router(engagement.router, prefix="/api/v1")
 
 
 # Startup event
@@ -126,7 +143,25 @@ async def startup_event():
     logger.info(f"Starting {settings.app_name}")
     logger.info(f"Environment: {settings.app_env}")
     logger.info(f"Debug mode: {settings.debug}")
+
+    # Initialize database
+    logger.info("Initializing database...")
+    try:
+        init_db()
+        logger.info("Database initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize database: {e}")
+
+    # Start engagement scheduler
+    logger.info("Starting engagement scheduler...")
+    try:
+        start_scheduler()
+        logger.info("Engagement scheduler started")
+    except Exception as e:
+        logger.error(f"Failed to start scheduler: {e}")
+
     logger.info("API Documentation available at /docs")
+    logger.info("Multi-profile system ready")
 
 
 # Shutdown event
@@ -134,6 +169,13 @@ async def startup_event():
 async def shutdown_event():
     """Application shutdown event"""
     logger.info(f"Shutting down {settings.app_name}")
+
+    # Stop engagement scheduler
+    try:
+        stop_scheduler()
+        logger.info("Engagement scheduler stopped")
+    except Exception as e:
+        logger.error(f"Error stopping scheduler: {e}")
 
 
 if __name__ == "__main__":
